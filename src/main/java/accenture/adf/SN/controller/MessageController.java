@@ -1,7 +1,9 @@
 package accenture.adf.SN.controller;
 
 import accenture.adf.SN.domain.Message;
+import accenture.adf.SN.domain.Views;
 import accenture.adf.SN.repo.MessageRepo;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +22,13 @@ public class MessageController {
     }
 
     @GetMapping
+    @JsonView(Views.IdName.class)
     public List<Message> list() {
         return messageRepo.findAll();
     }
 
     @GetMapping("{id}")
+    @JsonView(Views.FullMessage.class)
     public Message getOne(@PathVariable("id") Message message) {
         return message;
     }
